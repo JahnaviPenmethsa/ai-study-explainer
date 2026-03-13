@@ -4,7 +4,7 @@ An AI-powered web application that generates instant, student-friendly explanati
 
 ## Live Demo
 
-> Deploy to Vercel and update this link: `https://your-project.vercel.app`
+> https://ai-study-explainer-topaz.vercel.app/
 
 ---
 
