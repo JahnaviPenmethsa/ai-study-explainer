@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0f0e0d;
+  --cream: #faf8f4;
+  --amber: #e8a027;
+  --amber-light: #fef3dc;
+  --sage: #4a7c6f;
+  --rust: #c45c3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+.noise-bg {
+  position: relative;
+}
+
+.noise-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #c45c3a 0%,
+    #e8a027 25%,
+    #4a7c6f 50%,
+    #e8a027 75%,
+    #c45c3a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+.card-elevated {
+  background: white;
+  border: 1px solid rgba(15, 14, 13, 0.08);
+  box-shadow: 
+    0 1px 2px rgba(15,14,13,0.04),
+    0 4px 12px rgba(15,14,13,0.06),
+    0 12px 32px rgba(15,14,13,0.05);
+}
+
+.topic-pill {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  border: 1.5px solid rgba(15,14,13,0.12);
+}
+
+.topic-pill:hover {
+  border-color: var(--amber);
+  background: var(--amber-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232,160,39,0.2);
+}
+
+.explain-btn {
+  background: var(--ink);
+  color: var(--cream);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.explain-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--rust), var(--amber));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.explain-btn:hover::after {
+  opacity: 1;
+}
+
+.explain-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15,14,13,0.2);
+}
+
+.explain-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.explain-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-dot {
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+
+.explanation-text {
+  line-height: 1.85;
+  font-size: 1.05rem;
+}
+
+.explanation-text p {
+  margin-bottom: 1rem;
+}
+
+.explanation-text p:last-child {
+  margin-bottom: 0;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--amber) !important;
+  box-shadow: 0 0 0 3px rgba(232,160,39,0.15);
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stagger-1 { animation-delay: 0.1s; opacity: 0; }
+.stagger-2 { animation-delay: 0.2s; opacity: 0; }
+.stagger-3 { animation-delay: 0.3s; opacity: 0; }
+.stagger-4 { animation-delay: 0.4s; opacity: 0; }
